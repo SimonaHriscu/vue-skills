@@ -10,7 +10,7 @@
         />
         <transition name="alern-in">
           <p class="alert" v-bind="{ showAlert }">
-            {{ showAlert ? 'You need minimum 5 characters' : '' }}
+            {{ showAlert ? 'You need minimum 3 characters' : '' }}
           </p>
         </transition>
       </form>
@@ -43,7 +43,7 @@ export default {
   methods: {
     showAlert: false,
     addSkill() {
-      if (this.skill.length > 5) {
+      if (this.skill.length >= 3) {
         this.skills.push({ skill: this.skill });
         this.skill = '';
       } else {
