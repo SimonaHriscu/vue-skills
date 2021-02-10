@@ -6,11 +6,10 @@
           type="text"
           placeholder="Enter a skill you have.."
           v-model="skill"
-          v-validate="'min:5'"
           name="skill"
         />
-        <p class="alert" v-if="errors.has('skill')">
-          {{ errors.first('skill') }}
+        <p class="alert">
+          {{ showAlert ? 'You need minimum 5 characters' : '' }}
         </p>
       </form>
       <ul>
@@ -31,15 +30,15 @@ export default {
     };
   },
   methods: {
+    showAlert: false,
     addSkill() {
-      this.$validator.validateAll().then((result) => {
-        if (result) {
-          this.skills.push({ skill: this.skill });
-          this.skill = '';
-        } else {
-          console.log('Not valid');
-        }
-      });
+      if (this.skill.length > 5) {
+        this.skills.push({ skill: this.skill });
+        this.skill = '';
+      } else {
+        console.log('Not valid');
+        this.showAlert(true);
+      }
     },
   },
 };
