@@ -20,7 +20,10 @@
           enter-active-class="animated bounceInUp"
           leave-active-class="animated bounceOutDown"
         >
-          <li v-for="(data, index) in skills" :key="index">{{ data.skill }}</li>
+          <li v-for="(data, index) in skills" :key="index">
+            {{ data.skill }}
+            <i class="fa fa-minus-circle" v-on:click="remove(index)"></i>
+          </li>
         </transition-group>
       </ul>
       <p>These are the skills you possess:</p>
@@ -34,7 +37,7 @@ export default {
   data() {
     return {
       skill: '',
-      skills: [{ skill: 'Vue.js' }, { skill: 'Frontend developer' }],
+      skills: [{ skill: 'Vue.js' }, { skill: 'React.js' }],
     };
   },
   methods: {
@@ -48,12 +51,16 @@ export default {
         this.showAlert(true);
       }
     },
+    remove(id) {
+      this.skills.splice(id, 1);
+    },
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+@import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
 @import 'https://cdn.jsdelivr.net/npm/animate.css@3.5.1';
 
 .holder {
@@ -73,6 +80,8 @@ ul li {
   border-left: 5px solid #3eb3f6;
   margin-bottom: 2px;
   color: #3e5252;
+  display: flex;
+  justify-content: space-between;
 }
 
 p {
@@ -115,5 +124,11 @@ input {
   100% {
     transform: scale(1);
   }
+}
+i {
+  cursor: pointer;
+}
+i:hover {
+  color: red;
 }
 </style>
